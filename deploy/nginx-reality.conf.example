@@ -1,0 +1,14 @@
+# Same-machine REALITY target. Xray, rather than this block, owns public :443.
+# This is HTTPS on loopback, not plain HTTP. No proxy_pass is needed.
+# Change media.example.com and the certificate paths before enabling.
+server {
+    listen 127.0.0.1:8443 ssl;
+    http2 on;
+    server_name media.example.com;
+
+    ssl_certificate /etc/letsencrypt/live/media.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/media.example.com/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    include /opt/mivi/deploy/static-site.conf;
+}

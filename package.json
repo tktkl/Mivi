@@ -1,0 +1,18 @@
+{
+  "name": "mivi",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A self-contained static private cinema, inspired by Emby.",
+  "scripts": {
+    "dev": "python3 -m http.server 4173 --bind 127.0.0.1 --directory site",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "screenshots": "node scripts/screenshots.mjs"
+  },
+  "engines": { "node": ">=22" },
+  "devDependencies": {
+    "@playwright/test": "1.65.0",
+    "sharp": "0.35.5"
+  }
+}

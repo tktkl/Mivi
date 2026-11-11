@@ -1,0 +1,22 @@
+# Standalone HTTPS website: Nginx owns public port 443.
+# Change media.example.com and the certificate paths before enabling.
+# Nginx >= 1.25.1; older versions: see README.md.
+server {
+    listen 80;
+    listen [::]:80;
+    server_name media.example.com;
+    return 301 https://media.example.com$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name media.example.com;
+
+    ssl_certificate /etc/letsencrypt/live/media.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/media.example.com/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    include /opt/mivi/deploy/static-site.conf;
+}
